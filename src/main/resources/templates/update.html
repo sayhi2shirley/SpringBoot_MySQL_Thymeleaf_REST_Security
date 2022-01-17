@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+         <!-- Bootstrap CSS -->
+         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+               crossorigin="anonymous">     
+		<title> Update User </title>
+    </head>
+    <body>
+        <!-- Create a Navigation Bar -->
+        <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+            <!-- Navbar content -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" 
+                data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                       <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <!-- This thymeleaf atribute sec:authorize
+                          will be handled in secutity handler 
+                         -->
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                </ul>
+                <span class="navbar-text">
+                   E-Survey for Energy Consumption
+                </span>
+        </nav>
+        <br> <br> <br>
+   
+        <form action="#" th:action="@{/questions/save}" th:object="${questions}" method="post">
+             
+           <input type="hidden" th:value="${questionID}" th:field="*{questionID}"/>
+
+               <input type="text" id="QuestionText" th:field="*{QuestionText}" 
+                      style="width:600px;"
+                      name="QuestionText" required="required" minlength="3" />
+
+               <button type="submit" class="btn btn-info" > Update</button>
+               <a th:href="@{/questions/listallquestions}" class="btn btn-info">Back</a> 
+           </form> 
+        
+    </body>
+</html>

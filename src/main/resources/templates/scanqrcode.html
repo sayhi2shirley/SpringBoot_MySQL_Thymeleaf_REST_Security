@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+         <!-- Bootstrap CSS -->
+         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+               crossorigin="anonymous">  </link> 
+               <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+               <script type="text/javascript" src="instascan.min.js"></script>
+		<title> Login E-Survey ShangriLa City Council</title>
+<!-- jQuery library -->  
+        </script>
+        <!-- HTML5 QRCode min.js Javascript -->
+     <!--   <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.1.6/html5-qrcode.min.js" 
+                integrity="sha512-uI3z9bmL/OPF5Tqm0mZaxlDA91YTEYxSNt/qeMs31ehc1pqPEXGq88RjfLSRySE5PP6RlMymEP/RC84EeZ71vg==" 
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+		
+		<script type="text/javascript" src="jquery.min.js"></script> -->
+    </head>
+    <body>
+        <!-- Create a Navigation Bar -->
+        <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+            <!-- Navbar content -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" 
+                data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                       <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/registration">Registration</a>
+                    </li>
+                </ul>
+                <span class="navbar-text">
+                   E-Survey for Energy Consumption
+                </span>
+        </nav>
+        
+    <h4>Scan QR Code to login</h4>  
+    <div class=container>  
+       <div class="row justify-content-center mt-5">
+            <div class = "col-md-5">
+                <div class="card-header bg-transparent mb-0">
+                    <h5 class="text-center">
+                        <span class="font-weight-bold text-primary">Scan
+                        </span >
+                    </h5>
+                    <div class ="card-body">
+                        <video id="preview" width="100%">
+                        </video>
+                        
+                        <script type="text/javascript">
+      let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+      scanner.addListener('scan', function (content){
+      console.log(content);
+      });
+      Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+          scanner.start(cameras[0]);
+        } else {
+          console.error('No cameras found.');
+        }
+      }).catch(function (e) {
+        console.error(e);
+      });               
+      </script>  
+      
+                        <div class="form-group">
+                            <input type="text" class="from-control"/> 
+                    </div >
+                </div >
+            </div >
+        </div>
+    </div> 
+         <!--  <video id="preview"></video>-->
+ 
+    </body>
+
+    <!--alert(content); -->
+</html>
+

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+         <!-- Bootstrap CSS -->
+         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+               crossorigin="anonymous">     
+		<title> E-Survey ShangriLa City Council</title>
+    </head>
+    <body>
+        <!-- Create a Navigation Bar -->
+        <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+            <!-- Navbar content -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" 
+                data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                       <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/registration">Registration</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                </ul>
+                <span class="navbar-text">
+                   E-Survey for Energy Consumption
+                </span>
+        </nav>
+        <br>
+        <div class="container" text-center>
+            <div><h1> E-Survey Shangri-La City Council  <h1></div>
+  
+        
+                    <div class="jumbotron">
+            <h1 class="display-4">Hello <span th:text="${userName}"></span > !!!</h1>
+            <p class="lead">Climate change and global warming affect all regions around the world, and the Valley of Shangri-La is not
+an exception. Shangri-La City Council has committed to reducing greenhouse gas emissions such as CO2 and
+N2O from transport. It plans to introduce SLEZ (Shangri-L Low Emission Zone) to the city by the end of 2022
+and install more electric vehicle charging stations.</p>
+            <hr class="my-4">
+            <p>The Shangri-La City Council has decided to open public consultation on its plans to implement SLEZ, and the
+residents are being asked to offer their opinions on the detail and the proposed boundaries of SLEZ.</p>
+            <p class="lead">
+            <a class="btn btn-primary btn-lg" href="/user/survey" role="button">Take Survey</a>
+            </p>
+       </div>            
+    </div>
+        
+    </body>
+</html>

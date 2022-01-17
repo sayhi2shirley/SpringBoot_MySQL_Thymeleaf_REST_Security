@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+         <!-- Bootstrap CSS -->
+         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+               crossorigin="anonymous">     
+		<title> Login Page</title>
+    </head>
+    <body>
+        <!-- Create a Navigation Bar -->
+        <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+            <!-- Navbar content -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" 
+                data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                       <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+                <span class="navbar-text">
+                   E-Survey for Energy Consumption
+                </span>
+        </nav>
+        
+        <div class = "container">
+            <div class = "row">
+                <!-- To align the page in the center, we use col-md-offset 
+                     col-md-6 is the bootstrap CSS grade system -->
+                <div class="col-md-6 col-md-offset-3">
+                    <h1> Login Here </h1>
+                        <!-- Success Message -->
+<!--                        <div th:if="${param.loginsuccess}">
+                            <div class="alert alert-info">Logged into E-Survey Shangri La account. 
+                            <a href="/" th:href="@{/logout}">Logout</a>
+                            </div>
+                        </div> -->
+                                               
+                        <!-- Logout Message -->
+                        <div th:if="${param.logout}">
+                            <div class="alert alert-info"> You have been logged out. </div>
+                        </div> 
+                         
+                        
+                    <form th:action="@{/login}" th:object="${residentUser}"  method="post"> 
+
+                        <!-- Error Message -->
+                            <div th:if="${param.error}">
+                            <div class="alert alert-danger"> Invalid Username or Password. </div>
+                        </div>
+  
+                        
+                        <!-- Email Address -->
+                        <div class="form-group">
+                            <label for ="email"> Email </label> :
+                            <input type="email" class="form-control"
+                                   id="email" name="email" placeholder="Email Address" 
+                                   autofocus="autofocus">
+                        </div>
+                        
+                        <!-- Password -->
+                        <div class="form-group">
+                            <label for ="password"> Password </label> :
+                            <input type="password" class="form-control"
+                                   id="password" name="password" placeholder="Password" 
+                                   autofocus="autofocus">
+                        </div>
+                        
+                        <!-- Submit Button -->
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <input type="submit" name="login-submit" id="login-submit"
+                                    class="form-control btn btn-primary" value="Log in"/>
+                                    <br>
+                                    <span>New User? <a href="/" th:href="@{/registration}">Signup here</a></span>
+                                </div>
+                            </div>
+                        </div>
+             
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </body>
+</html>

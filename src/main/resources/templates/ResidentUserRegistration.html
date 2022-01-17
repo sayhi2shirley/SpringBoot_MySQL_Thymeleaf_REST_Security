@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+         <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+               crossorigin="anonymous"> 
+		<title> E-Survey ShangriLa City Council</title>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+      body,
+      html {
+        padding: 0;
+        margin: 0;
+        font-family: 'Helvetica Neue', 'Calibri', Arial, sans-serif;
+        height: 100%;
+      }
+
+      #app {
+       /* background: #263238;
+        background:lightblue no-repeat fixed right; */
+        background: transparent;
+        display: flex;
+        align-items: stretch;
+        justify-content: space-between;
+        height: 50%;
+        width:100%;
+      }
+
+      .sidebar {
+        background: #eceff1;
+        min-width: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        overflow: auto;
+      }
+
+      .form-group {
+        justify-content: flex-start;
+      }
+
+      .empty {
+        font-style: italic;
+      }
+
+      .preview-container {
+        flex-direction: column;
+        align-items: right;
+        justify-content: flex-end;
+        display: flex;
+        width: 75%;
+        height:75%;
+        overflow: hidden;
+      }
+    </style>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+    <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+ 
+		<script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    </head>
+    <body>
+        <!-- Create a Navigation Bar -->
+        <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+            <!-- Navbar content -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" 
+                data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                       <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+                <span class="navbar-text">
+                   E-Survey for Energy Consumption
+                </span>
+        </nav>
+   
+        
+        <!-- Create a HTML Registration Form >
+        <div class="container">
+        <div class="row">
+            <!-- Add offset to align the form in center -->
+            <div class="col-md-6 col-md-offset-3">
+            
+                <!-- Registration Successful -->
+                <div th:if="${param.acccreationsuccess}">
+                    <div class="alert alert-info">E-Survey Shangri-La Account is created. 
+                    <a href="/" th:href="@{/login}">Login here</a>
+                    </div>
+                    
+                </div>
+                
+                <div th:if="${param.acccreationfailed}">
+                    <div class="alert alert-info">Account creation failed, Register again.</div>
+                </div>
+                
+
+                <h3>Signup Here!!</h3>
+                
+                <!-- Post request will invoke the method registerResidentUserAcc() -->
+                    <form action="#" th:action="@{/process}" th:object="${residentUser}" method="post" >
+                    <!-- Adding the inputs from user -->                
+                    <!-- Full Name -->                         
+                    <div class="form-group" th:classappend="${#fields.hasErrors('fullName')}? 'has-error':''">
+                        <label for="fullName" class="control-label">Name</label> 
+                        <input id="fullName" class="form-control" type="text" 
+                            th:field="*{fullName}" required autofocus="autofocus"
+                            minlength="3" maxlength="20"  
+                            placeholder="Full Name"/>
+                    <p class="error-message" th:each="error : ${#fields.errors('fullName')}" 
+                        th:text="${error}">Validation error</p> 
+                    </div>
+                    
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="email" class="control-label">E-mail</label> 
+                        <input type="email" name="email" 
+                               th:value="${residentUser.email}" 
+                               th:classappend="${#fields.hasErrors('email')}? 'is-invalid':''"
+                               class="form-control" id="email"
+                               required autofocus="autofocus" placeholder="Email Address"/>
+                        <div th:each="e : ${#fields.errors('email')}" th:text="${e}"  
+                             class="invalid-feedback" id="emailField"></div>
+                    </div>
+                    <!-- Password -->
+                    <div class="form-group" th:classappend="${#fields.hasErrors('password')}? 'has-error':''">
+                        <label for="password" class="control-label">Password</label> 
+                        <input id="password" class="form-control" 
+                               type="password" th:field="*{password}" minlength="8" 
+                               required autofocus="autofocus" placeholder="Password"/>
+                     <!--   <p class="error-message" th:each="error : ${#fields.errors('password')}" th:text="${error}">Validation error</p> -->
+                    </div>
+                    
+                    <!-- Date of Birth -->
+                    <div class="form-group" th:classappend="${#fields.hasErrors('dateOfBirth')}? 'has-error':''">
+                        <label for="dateOfBirth" class="control-label">Date of Birth (yyyy-mm-dd)</label>
+                        <input id = "dateOfBirth" class="form-control" type="text"
+                               th:field="*{dateOfBirth}" required autofocus="autofocus" 
+                               placeholder="Date of Birth"/>
+                    <!--    <p class="error-message" th:each="error: ${#fields.errors('dateOfBirth')}" th:text="${error}">Validation error</p>     -->
+                    </div>
+                    
+                    
+                    <!-- Home Address -->
+                    <div class="form-group" th:classappend="${#fields.hasErrors('homeAddress')}? 'has-error':''">
+                        <label for="homeAddress" class="control-label">Home Address</label>
+                        <input id = "homeAddress" class="form-control" 
+                               th:field="*{homeAddress}" required autofocus="autofocus" 
+                               minlength="6" maxlength="100"
+                               placeholder="Home Address"/>
+                    <!--    <p class="error-message" th:each="error: ${#fields.errors('homeAddress')}" th:text="${error}">Validation error</p>     -->
+                    </div>
+                    
+                    <!-- SNI Number -->
+                   <!-- <div class="form-group" th:classappend="${#fields.hasErrors('sniNumber')}? 'has-error':''">
+                        <label for="sniNumber" class="control-label">SNI Number</label>
+                        <input id = "sniNumber" class="form-control" 
+                               th:field="*{sniNumber}" required autofocus="autofocus" 
+                               placeholder="SNI Number"/>
+                      <p class="error-message" th:each="error: ${#fields.errors('sniNumber')}" th:text="${error}">Validation error</p>    
+                    </div> -->
+                    
+                       <div id="app">
+                         <div class="form-group">
+                      <label for="sniNumber" class="control-label">SNI Number</label>
+                      <input type="text" id ="sniNumber" class="from-control"
+                              th:field="*{sniNumber}" required autofocus="autofocus" 
+                               placeholder="SNI Number"/> <br>
+                      
+                      <input type="radio" name="scan" id="videoon" value="ScanQRCode" onclick="handleClick(this);"/>
+                      <label for="scan" class="control-label">Scan QRCode</label>
+                      </div >          
+                          <div class="w3-display-topright">
+                             <video id="preview"></video>
+                           </div>
+                      </div>
+                    <!--
+                                      
+                    <div class="form-group" th:classappend="${#fields.hasErrors('confirmEmail')}? 'has-error':''">
+                        <label for="confirmEmail" class="control-label">Confirm e-mail</label> 
+                        <input id="confirmEmail" class="form-control" th:field="*{confirmEmail}" />
+                        <p class="error-message" th:each="error : ${#fields.errors('confirmEmail')}" th:text="${error}">Validation error</p>
+                    </div>
+                   
+                    <div class="form-group" th:classappend="${#fields.hasErrors('confirmPassword')}? 'has-error':''">
+                        <label for="confirmPassword" class="control-label">Confirm password</label> 
+                        <input id="confirmPassword" class="form-control" type="password" th:field="*{confirmPassword}" />
+                        <p class="error-message" th:each="error : ${#fields.errors('confirmPassword')}" th:text="${error}">Validation error</p>
+                    </div>
+                   
+                    
+                    <div class="form-group" th:classappend="${#fields.hasErrors('terms')}? 'has-error':''">
+                        <input id="terms" type="checkbox" th:field="*{terms}" /> 
+                        <label class="control-label" for="terms"> I agree with the <ahref="#">terms and conditions</a> for Registration.</label>
+                        <p class="error-message" th:each="error : ${#fields.errors('terms')}" th:text="${error}">Validation error</p>
+                    </div>
+                    -->
+                    
+                    <!-- Submit Button -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Register</button>
+                        <span>Already registered? <a href="/" th:href="@{/login}">Login here</a></span>
+                    </div>
+   
+                </form>
+            </div>
+        </div>
+    </div>
+      <script type="text/javascript">
+            function handleClick(scan) {
+	alert('Opening WebCam to Scan QR code ');
+	   if (scan.value == "ScanQRCode")
+    
+      var app = new Vue({
+        el: '#app',
+        data: {
+          scanner: null,
+          activeCameraId: null,
+          cameras: [],
+          scans: []
+        },
+        mounted: function() {
+          var self = this;
+          self.scanner = new Instascan.Scanner({
+            video: document.getElementById('preview'),
+            scanPeriod: 5
+          });
+          self.scanner.addListener('scan', function(content, image) {
+            self.scans.unshift({
+              date: +(Date.now()),
+              content: content
+            });
+            document.getElementById("sniNumber").value = content;
+            //$("#qrcode").val(content);
+          });
+          Instascan.Camera.getCameras().then(function(cameras) {
+            self.cameras = cameras;
+            if (cameras.length > 0) {
+              self.activeCameraId = cameras[0].id;
+              self.scanner.start(cameras[0]);
+            } else {
+              console.error('No cameras found.');
+            }
+          }).catch(function(e) {
+            console.error(e);
+          });
+        },
+        methods: {
+          formatName: function(name) {
+            return name || '(unknown)';
+          },
+          selectCamera: function(camera) {
+            this.activeCameraId = camera.id;
+            this.scanner.start(camera);
+          }
+        }
+      });
+      }
+      </script>  
+    </body>
+</ht>
