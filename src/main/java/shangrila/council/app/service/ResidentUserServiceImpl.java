@@ -21,14 +21,13 @@ import shangrila.council.app.web.dto.ResidentUserRegDTO;
 public class ResidentUserServiceImpl implements ResidentUserService{
 
 	private ResidentUserRepository residentUserRepository;	
-	
+
 	/* SHA-1 algorithm will be used internally to encode the password. */
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-	
+
 	public ResidentUserServiceImpl(ResidentUserRepository residentUserRepository) {
 		super();
-		System.out.println("Service: ResidentUserServiceImpl\n");
 		this.residentUserRepository = residentUserRepository;
 	}
 
@@ -47,39 +46,36 @@ public class ResidentUserServiceImpl implements ResidentUserService{
 	/* Backend Implementation for Login */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
+
 		System.out.println(username);
 		ResidentUser residentUser = residentUserRepository.findByEmail(username);
-	
+
 		if (residentUser == null) {
 			throw new UsernameNotFoundException("Invalid Username or Password");
 		}
-		
-		System.out.println("Service 1: loadUserByUsername\n" + residentUser.getAdmin() + " " +
-				residentUser.getEmail());
+
 		/* For the interface UserDetails, return the User object */
 		//return new org.springframework.security.core.userdetails.User(residentUser.getEmail(),
-			//	residentUser.getPassword(), getAuthorities());
+		//	residentUser.getPassword(), getAuthorities());
 		return new UserSurveyService(residentUser);
 	} 
-	
+
 	/* Adding/Setting the authorities for the Resident Users*/
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 
-	    List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-	    ResidentUser residentUser = residentUserRepository.findByEmail("admin@shangrila.gov.uk");
-	    System.out.println("Service: getAuthorities\n");
-	    
-	    /* All users will have only one Role (either Admin or USER) */
-	    if (residentUser == null) {
-	    	 authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-        } else {
-            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        }
-        
-	    return authorities;
+		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+		ResidentUser residentUser = residentUserRepository.findByEmail("admin@shangrila.gov.uk");
+
+		/* All users will have only one Role (either Admin or USER) */
+		if (residentUser == null) {
+			authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+		} else {
+			authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		}
+
+		return authorities;
 	}
-	
+
 
 }

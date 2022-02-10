@@ -1,8 +1,4 @@
 package shangrila.council.app.web.dto;
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.validation.constraints.*;
 
 public class ResidentUserRegDTO {
 
@@ -14,18 +10,18 @@ public class ResidentUserRegDTO {
 	 * This is used to transfer the data from server to client or client
 	 *  to server. Bulk amount information is also passed using DTO object. 
 	 */
-	
+
 	private String email;
 
 	private String fullName;	
-	private Date dateOfBirth;
-	
+	private String dateOfBirth;
+
 	private String homeAddress;
-	
+
 	private String password;
 	private String sniNumber;
 	private int admin;	
-	
+
 	public int getAdmin() {
 		return admin;
 	}
@@ -35,9 +31,9 @@ public class ResidentUserRegDTO {
 	}
 
 	public ResidentUserRegDTO() {}
-	
+
 	public ResidentUserRegDTO(String email, String fullName, 
-			Date dateOfBirth, String homeAddress, 
+			String dateOfBirth, String homeAddress, 
 			String password, String sniNumber, int admin) {
 		super();
 		this.email = email;
@@ -47,7 +43,6 @@ public class ResidentUserRegDTO {
 		this.password = password;
 		this.sniNumber = sniNumber;
 		this.admin = admin;
-		System.out.println("DTO: ResidentUserRegDTO\n");
 	}
 
 	public String getEmail() {
@@ -62,10 +57,10 @@ public class ResidentUserRegDTO {
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
-	public Date getDateOfBirth() {
+	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	public String getHomeAddress() {
