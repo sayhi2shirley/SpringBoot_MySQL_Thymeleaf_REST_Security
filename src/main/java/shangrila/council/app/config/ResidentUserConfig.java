@@ -26,13 +26,11 @@ public class ResidentUserConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
-		System.out.println("Config: passwordEncoder \n");
 		return new BCryptPasswordEncoder();
 	}
 
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
-		System.out.println("Config: DaoAuthenticationProvider \n");
 		DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
 		auth.setUserDetailsService(residentUserService);
 		auth.setPasswordEncoder(passwordEncoder());
@@ -41,22 +39,18 @@ public class ResidentUserConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		System.out.println("Config: AuthenticationManagerBuilder \n");
 		auth.authenticationProvider(authenticationProvider());
 	}
 
 
 	@Override
 	protected void configure(HttpSecurity security) throws Exception {
-		System.out.println("onfig: HttpSecurity \n");
 		/* Default Configurations Disabled. */
 		security.httpBasic().disable();
-
 
 		/* Provide Access to the different URLs, 
 		 * by starting more restricted to less restricted.
 		 */
-
 		security.csrf().disable()
 		.authorizeRequests()
 		.antMatchers("/registration").permitAll()

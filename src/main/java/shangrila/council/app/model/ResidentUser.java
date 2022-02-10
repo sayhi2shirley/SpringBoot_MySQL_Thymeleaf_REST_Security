@@ -1,15 +1,11 @@
 package shangrila.council.app.model;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -26,9 +22,8 @@ public class ResidentUser {
 	@Column(name="FullName", nullable=false)
 	private String fullName;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name="DoB")
-	private Date dateOfBirth;
+	private String dateOfBirth;
 
 	@Column(name="Address", nullable=false)
 	private String homeAddress;
@@ -46,7 +41,7 @@ public class ResidentUser {
 	private int admin;
 	public ResidentUser() {  }
 
-	public ResidentUser(String fullName, Date dateOfBirth, String homeAddress,
+	public ResidentUser(String fullName, String dateOfBirth, String homeAddress,
 			String email, String password, String sniNumber, int admin) {
 		super();
 		this.fullName = fullName;
@@ -76,11 +71,11 @@ public class ResidentUser {
 		this.fullName = fullName;
 	}
 
-	public Date getDateOfBirth() {
+	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 

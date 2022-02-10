@@ -10,7 +10,6 @@ import shangrila.council.app.web.dto.ResidentUserRegDTO;
 
 public interface ResidentUserService extends UserDetailsService {
     /* Save() method will save the Resident User's registration data. */ 
-
 	ResidentUser save(ResidentUserRegDTO registrationDTO);
 
 	Collection<? extends GrantedAuthority> getAuthorities();

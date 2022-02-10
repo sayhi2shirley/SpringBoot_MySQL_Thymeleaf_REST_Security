@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ShangriLaESuveyToolApplication {
 
 	public static void main(String[] args) {
-		System.out.println("App: ShangriLaESuveyToolApplication \n");
 		SpringApplication.run(ShangriLaESuveyToolApplication.class, args);
 	}
 
